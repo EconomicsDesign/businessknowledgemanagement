@@ -116,8 +116,31 @@ function handleFileSelect(event) {
     const files = event.target.files;
     if (files.length > 0) {
         const file = files[0];
-        document.querySelector('.upload-area p').textContent = `Selected: ${file.name}`;
+        const fileSize = formatFileSize(file.size);
+        const fileType = getFileTypeDescription(file);
+        
+        document.querySelector('.upload-area p').innerHTML = `
+            <strong>Selected:</strong> ${file.name}<br>
+            <small class="text-gray-500">Size: ${fileSize} | Type: ${fileType}</small>
+        `;
     }
+}
+
+function getFileTypeDescription(file) {
+    const ext = file.name.toLowerCase().split('.').pop();
+    const typeMap = {
+        'txt': 'Text Document',
+        'pdf': 'PDF Document', 
+        'docx': 'Word Document',
+        'xlsx': 'Excel Spreadsheet',
+        'csv': 'CSV Data',
+        'jpg': 'JPEG Image',
+        'jpeg': 'JPEG Image',
+        'png': 'PNG Image',
+        'gif': 'GIF Image',
+        'webp': 'WebP Image'
+    };
+    return typeMap[ext] || file.type || 'Unknown';
 }
 
 // Load segments from API
@@ -224,11 +247,34 @@ async function handleDocumentUpload(event) {
             await loadSegments();
             
         } else {
-            showNotification(response.data.error || 'Upload failed', 'error');
+            const errorMsg = response.data.error || 'Upload failed';
+            let errorDetails = '';
+            
+            // Add file type info if available
+            if (response.data.fileType && response.data.fileName) {
+                errorDetails += `\nFile: ${response.data.fileName} (${response.data.fileType})`;
+            }
+            if (response.data.supportedTypes) {
+                errorDetails += `\nSupported types: ${response.data.supportedTypes}`;
+            }
+            
+            showNotification(errorMsg + errorDetails, 'error');
         }
     } catch (error) {
         console.error('Upload error:', error);
-        showNotification('Upload failed: ' + (error.response?.data?.error || error.message), 'error');
+        const errorData = error.response?.data;
+        let errorMsg = 'Upload failed: ';
+        
+        if (errorData?.error) {
+            errorMsg += errorData.error;
+            if (errorData.supportedTypes) {
+                errorMsg += `\nSupported file types: ${errorData.supportedTypes}`;
+            }
+        } else {
+            errorMsg += error.message;
+        }
+        
+        showNotification(errorMsg, 'error');
     }
 }
 

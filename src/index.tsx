@@ -1,6 +1,7 @@
 import { Hono } from 'hono'
 import { cors } from 'hono/cors'
 import { serveStatic } from 'hono/cloudflare-workers'
+import { processFile, getSupportedFileTypes, getFileTypeDescription } from './fileProcessor'
 
 // Type definitions for Cloudflare bindings
 type Bindings = {
@@ -163,17 +164,28 @@ app.post('/api/documents/upload', async (c) => {
       return c.json({ success: false, error: 'Title and either file or content required' }, 400);
     }
 
-    // If file is provided, extract content
+    // If file is provided, extract content using the file processor
     if (file) {
-      if (file.type === 'text/plain' || file.name.endsWith('.txt')) {
-        content = await file.text();
-      } else {
-        return c.json({ success: false, error: 'Currently only text files are supported. Please paste content directly for other file types.' }, 400);
+      const processedFile = await processFile(file);
+      
+      if (processedFile.error) {
+        return c.json({ 
+          success: false, 
+          error: processedFile.error,
+          fileType: file.type,
+          fileName: file.name,
+          supportedTypes: getSupportedFileTypes().join(', ')
+        }, 400);
       }
+      
+      content = processedFile.content;
     }
 
     if (!content || content.trim().length === 0) {
-      return c.json({ success: false, error: 'No content found in the document' }, 400);
+      return c.json({ 
+        success: false, 
+        error: 'No content found in the document. Please ensure the file contains readable text or paste content directly.' 
+      }, 400);
     }
 
     // Auto-categorise using AI
@@ -507,8 +519,8 @@ app.get('/', (c) => {
                                 <div class="upload-area rounded-lg p-8 text-center">
                                     <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-4"></i>
                                     <p class="text-gray-600 mb-2">Drop your file here or click to browse</p>
-                                    <p class="text-sm text-gray-400">Supports: TXT files</p>
-                                    <input type="file" id="file-input" accept=".txt" class="hidden">
+                                    <p class="text-sm text-gray-400">Supports: TXT, PDF, Word (.docx), Excel (.xlsx), CSV, Images (JPG, PNG)</p>
+                                    <input type="file" id="file-input" accept=".txt,.pdf,.docx,.xlsx,.csv,.jpg,.jpeg,.png,.gif,.webp" class="hidden">
                                     <button type="button" onclick="document.getElementById('file-input').click()" class="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
                                         Choose File
                                     </button>
