@@ -7,7 +7,8 @@
 
 ## 🌐 URLs
 - **Development**: https://3000-ipcasslymqyl781ow4rmv.e2b.dev
-- **GitHub**: https://github.com/username/webapp (to be configured)
+- **Production**: https://business-knowledge-tool.pages.dev (Cloudflare Pages)
+- **GitHub**: https://github.com/EconomicsDesign/businessknowledgemanagement
 
 ## 🚀 Current Features (Completed)
 1. **Enhanced Document Upload System**
