@@ -500,7 +500,7 @@ app.get('/', (c) => {
         <header class="bg-white shadow-sm border-b">
             <div class="max-w-7xl mx-auto px-4 py-4">
                 <h1 class="text-2xl font-bold text-gray-900 flex items-center">
-                    <img src="/static/ed-logo-original.png" alt="EconomicsDesign Logo" class="ed-logo" />
+                    <img src="/static/ed-logo-original.jpg" alt="EconomicsDesign Logo" class="ed-logo" />
                     Business Knowledge Management Tool
                 </h1>
                 <p class="text-gray-600 mt-1">Upload documents, get automatic categorisation, and chat with your business knowledge</p>
