@@ -10,7 +10,7 @@
     {
       "binding": "DB",
       "database_name": "webapp-production",
-      "database_id": "placeholder-will-be-updated-when-deployed"
+      "database_id": "a5beac0f-e512-435a-be7d-33f8164fbfe6"
     }
   ],
   "ai": {
