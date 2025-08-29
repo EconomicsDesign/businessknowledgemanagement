@@ -10,11 +10,13 @@
 - **GitHub**: https://github.com/username/webapp (to be configured)
 
 ## 🚀 Current Features (Completed)
-1. **Document Upload System**
-   - Support for text file uploads (.txt)
+1. **Enhanced Document Upload System**
+   - Support for multiple file formats: **TXT, PDF, Word (.docx), Excel (.xlsx), CSV, Images (JPG, PNG)**
    - Paste content directly option
-   - Drag and drop file interface
-   - Automatic content processing
+   - Drag and drop file interface with file type detection
+   - Automatic content processing and extraction
+   - CSV files converted to readable text format
+   - Helpful error messages for unsupported formats
 
 2. **AI-Powered Categorisation**
    - Automatic document categorisation using Cloudflare AI (Llama-3-8b-instruct)
@@ -98,6 +100,23 @@
 4. Review source documents cited in responses
 5. Continue conversation - the assistant maintains context
 
+### File Upload Capabilities
+**Fully Supported (Ready for Production)**:
+- **Text Files (.txt)** - Direct text extraction
+- **CSV Files (.csv)** - Converted to readable table format
+
+**Partially Supported (Requires External Services)**:
+- **PDF Files (.pdf)** - Shows guidance to paste content or contact admin
+- **Word Documents (.docx)** - Shows guidance to paste content or contact admin  
+- **Excel Files (.xlsx)** - Shows guidance to export to CSV or paste content
+- **Images (.jpg, .png)** - Shows guidance to transcribe text or contact admin
+
+**Legacy Formats**:
+- **Old Word (.doc)** - Recommends saving as .docx
+- **Old Excel (.xls)** - Recommends saving as .xlsx
+
+*Note: For production deployment with full file processing, external API integrations can be added for PDF extraction, OCR, and document parsing.*
+
 ### Business Segments
 The system automatically categorises documents into these segments:
 - **General** - General business information
@@ -143,11 +162,11 @@ curl http://localhost:3000
 - **Build**: Vite with Cloudflare Pages plugin
 
 ## 🔄 Features Not Yet Implemented
-1. **Extended File Format Support**
-   - PDF document processing
-   - Word document (.docx) support
-   - Excel spreadsheet analysis
-   - Image text extraction (OCR)
+1. **Advanced File Processing Services**
+   - PDF text extraction (requires external API integration)
+   - Word document processing (requires external service)
+   - Excel spreadsheet analysis (requires external service)  
+   - Image OCR text extraction (requires external API)
 
 2. **Advanced Search & Analytics**
    - Full-text search across documents
@@ -176,10 +195,10 @@ curl http://localhost:3000
 ## 🎯 Recommended Next Steps
 
 ### Immediate (Phase 1)
-1. **PDF Support**: Implement PDF text extraction for broader file support
-2. **Enhanced Search**: Add full-text search across document content
+1. **External Service Integration**: Set up PDF, Word, Excel processing APIs
+2. **Enhanced Search**: Add full-text search across document content  
 3. **User Authentication**: Basic login system for security
-4. **Cloud Deployment**: Deploy to Cloudflare Pages for production use
+4. **Analytics Dashboard**: Usage statistics and document insights
 
 ### Short-term (Phase 2)  
 1. **Advanced Analytics**: Document usage and search analytics
@@ -193,11 +212,28 @@ curl http://localhost:3000
 3. **Workflow Integration**: Business process automation
 4. **Advanced Analytics**: Predictive insights and recommendations
 
+## 🚀 Deployment Instructions
+
+### Quick Start Deployment
+1. **Run setup script**: `./deploy-setup.sh`
+2. **Create GitHub repository** and push code
+3. **Set up Cloudflare Pages** (connects to GitHub)
+4. **Configure D1 database**: `./cloudflare-setup.sh`
+5. **Your site is live!** 🎉
+
+### Detailed Guide
+See [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md) for complete step-by-step instructions.
+
+### Deployment Scripts
+- `./deploy-setup.sh` - Prepares project for GitHub deployment
+- `./cloudflare-setup.sh` - Configures Cloudflare D1 database and services
+
 ## 📝 Development Notes
 - The application uses British English throughout the interface
 - All AI responses are constrained to uploaded document content only
 - Database is automatically initialised with default business segments
-- Local development uses SQLite, production will use Cloudflare D1
+- Local development uses SQLite, production uses Cloudflare D1
+- Multiple file types supported with graceful error handling
 - The system prioritises simplicity and can be extended with additional features
 
 ## 🔐 Security Considerations
