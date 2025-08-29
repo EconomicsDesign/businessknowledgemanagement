@@ -1,4 +1,15 @@
-/* Business Knowledge Management Tool - Additional Styles */
+/* Business Knowledge Management Tool - EconomicsDesign Branding */
+
+/* EconomicsDesign Brand Colors */
+:root {
+    --ed-salmon: #EE716A;
+    --ed-melon: #F6B0A4;
+    --ed-charcoal: #373F51;
+    --ed-ice-blue: #5CA4A9;
+    --ed-opal: #9BC1BC;
+    --ed-mint: #D1E3DD;
+    --ed-burgundy: #9C0D38;
+}
 
 /* Smooth transitions for interactive elements */
 .tab-btn {
@@ -7,7 +18,7 @@
 }
 
 .tab-btn:hover {
-    color: #4f46e5;
+    color: var(--ed-salmon);
 }
 
 /* Upload area styling */
@@ -18,13 +29,13 @@
 }
 
 .upload-area:hover {
-    border-color: #3b82f6;
-    background-color: #f8fafc;
+    border-color: var(--ed-salmon);
+    background-color: #fef7f7;
 }
 
 .upload-area.dragover {
-    border-color: #3b82f6;
-    background-color: #f0f9ff;
+    border-color: var(--ed-salmon);
+    background-color: #fef2f2;
     transform: scale(1.02);
 }
 

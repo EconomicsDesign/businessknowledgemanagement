@@ -87,17 +87,17 @@ async function initDatabase(db: D1Database) {
       CREATE INDEX IF NOT EXISTS idx_knowledge_chunks_document_id ON knowledge_chunks(document_id);
       CREATE INDEX IF NOT EXISTS idx_chat_messages_session_id ON chat_messages(session_id);
 
-      -- Insert default segments
+      -- Insert default segments with EconomicsDesign brand colors
       INSERT OR IGNORE INTO segments (name, description, colour) VALUES 
-        ('General', 'General business information and documents', '#6B7280'),
-        ('Accounting', 'Financial records, invoices, and accounting documents', '#10B981'),
-        ('Finance', 'Financial planning, budgets, and investment information', '#F59E0B'),
-        ('Marketing', 'Marketing materials, campaigns, and customer information', '#EF4444'),
-        ('Operations', 'Operational procedures, workflows, and processes', '#8B5CF6'),
-        ('Human Resources', 'HR policies, employee information, and recruitment', '#06B6D4'),
-        ('Legal', 'Contracts, legal documents, and compliance information', '#64748B'),
-        ('Product', 'Product specifications, development, and documentation', '#F97316'),
-        ('Customer Service', 'Customer support, feedback, and service procedures', '#84CC16');
+        ('General', 'General business information and documents', '#373F51'),
+        ('Accounting', 'Financial records, invoices, and accounting documents', '#5CA4A9'),
+        ('Finance', 'Financial planning, budgets, and investment information', '#EE716A'),
+        ('Marketing', 'Marketing materials, campaigns, and customer information', '#9C0D38'),
+        ('Operations', 'Operational procedures, workflows, and processes', '#9BC1BC'),
+        ('Human Resources', 'HR policies, employee information, and recruitment', '#F6B0A4'),
+        ('Legal', 'Contracts, legal documents, and compliance information', '#373F51'),
+        ('Product', 'Product specifications, development, and documentation', '#EE716A'),
+        ('Customer Service', 'Customer support, feedback, and service procedures', '#D1E3DD');
     `;
 
     await db.exec(migrationSQL);
@@ -449,18 +449,72 @@ app.get('/', (c) => {
         <script src="https://cdn.tailwindcss.com"></script>
         <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
         <style>
+          /* EconomicsDesign Brand Colors */
+          :root {
+            --ed-salmon: #EE716A;
+            --ed-melon: #F6B0A4;
+            --ed-charcoal: #373F51;
+            --ed-ice-blue: #5CA4A9;
+            --ed-opal: #9BC1BC;
+            --ed-mint: #D1E3DD;
+            --ed-burgundy: #9C0D38;
+          }
+          
           .segment-badge { transition: all 0.3s ease; }
           .chat-container { max-height: 400px; overflow-y: auto; }
           .upload-area { border: 2px dashed #cbd5e1; transition: all 0.3s ease; }
-          .upload-area.dragover { border-color: #3b82f6; background-color: #f0f9ff; }
+          .upload-area.dragover { border-color: var(--ed-salmon); background-color: #fef7f7; }
+          
+          /* Brand Color Overrides */
+          .bg-blue-600 { background-color: var(--ed-salmon) !important; }
+          .text-blue-600 { color: var(--ed-salmon) !important; }
+          .border-blue-500 { border-color: var(--ed-salmon) !important; }
+          .hover\\:bg-blue-700:hover { background-color: #d85e58 !important; }
+          .focus\\:ring-blue-500:focus { --tw-ring-color: var(--ed-salmon) !important; }
+          .focus\\:border-blue-500:focus { border-color: var(--ed-salmon) !important; }
+          
+          /* Secondary colors */
+          .bg-purple-600 { background-color: var(--ed-ice-blue) !important; }
+          .hover\\:bg-purple-700:hover { background-color: #4a8b90 !important; }
+          .text-purple-600 { color: var(--ed-ice-blue) !important; }
+          .focus\\:ring-purple-500:focus { --tw-ring-color: var(--ed-ice-blue) !important; }
+          
+          .bg-indigo-600 { background-color: var(--ed-charcoal) !important; }
+          .hover\\:bg-indigo-700:hover { background-color: #2a3142 !important; }
+          .text-indigo-600 { color: var(--ed-charcoal) !important; }
+          .focus\\:ring-indigo-500:focus { --tw-ring-color: var(--ed-charcoal) !important; }
+          
+          /* Logo styling */
+          .ed-logo {
+            width: 40px;
+            height: 40px;
+            margin-right: 12px;
+            vertical-align: middle;
+          }
         </style>
     </head>
     <body class="bg-gray-50 min-h-screen">
         <!-- Header -->
         <header class="bg-white shadow-sm border-b">
             <div class="max-w-7xl mx-auto px-4 py-4">
-                <h1 class="text-2xl font-bold text-gray-900">
-                    <i class="fas fa-brain mr-2 text-blue-600"></i>
+                <h1 class="text-2xl font-bold text-gray-900 flex items-center">
+                    <svg class="ed-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <!-- EconomicsDesign Logo -->
+                        <defs>
+                            <linearGradient id="edGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#EE716A;stop-opacity:1" />
+                                <stop offset="50%" style="stop-color:#F6B0A4;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#EE716A;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <!-- Isometric cube design similar to your logo -->
+                        <path d="M20 30 L50 15 L80 30 L80 60 L50 75 L20 60 Z" fill="url(#edGradient)" stroke="#373F51" stroke-width="2"/>
+                        <path d="M20 30 L50 45 L80 30" fill="none" stroke="#373F51" stroke-width="2"/>
+                        <path d="M50 45 L50 75" fill="none" stroke="#373F51" stroke-width="2"/>
+                        <rect x="25" y="35" width="20" height="4" fill="#5CA4A9" rx="2"/>
+                        <rect x="55" y="35" width="20" height="4" fill="#5CA4A9" rx="2"/>
+                        <rect x="35" y="45" width="20" height="4" fill="#9BC1BC" rx="2"/>
+                    </svg>
                     Business Knowledge Management Tool
                 </h1>
                 <p class="text-gray-600 mt-1">Upload documents, get automatic categorisation, and chat with your business knowledge</p>

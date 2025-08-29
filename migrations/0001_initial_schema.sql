@@ -65,14 +65,14 @@ CREATE INDEX IF NOT EXISTS idx_knowledge_chunks_document_id ON knowledge_chunks(
 CREATE INDEX IF NOT EXISTS idx_chat_messages_session_id ON chat_messages(session_id);
 CREATE INDEX IF NOT EXISTS idx_chat_sessions_last_activity ON chat_sessions(last_activity);
 
--- Insert default segments
+-- Insert default segments with EconomicsDesign brand colors
 INSERT OR IGNORE INTO segments (name, description, colour) VALUES 
-  ('General', 'General business information and documents', '#6B7280'),
-  ('Accounting', 'Financial records, invoices, and accounting documents', '#10B981'),
-  ('Finance', 'Financial planning, budgets, and investment information', '#F59E0B'),
-  ('Marketing', 'Marketing materials, campaigns, and customer information', '#EF4444'),
-  ('Operations', 'Operational procedures, workflows, and processes', '#8B5CF6'),
-  ('Human Resources', 'HR policies, employee information, and recruitment', '#06B6D4'),
-  ('Legal', 'Contracts, legal documents, and compliance information', '#64748B'),
-  ('Product', 'Product specifications, development, and documentation', '#F97316'),
-  ('Customer Service', 'Customer support, feedback, and service procedures', '#84CC16');
+  ('General', 'General business information and documents', '#373F51'),
+  ('Accounting', 'Financial records, invoices, and accounting documents', '#5CA4A9'),
+  ('Finance', 'Financial planning, budgets, and investment information', '#EE716A'),
+  ('Marketing', 'Marketing materials, campaigns, and customer information', '#9C0D38'),
+  ('Operations', 'Operational procedures, workflows, and processes', '#9BC1BC'),
+  ('Human Resources', 'HR policies, employee information, and recruitment', '#F6B0A4'),
+  ('Legal', 'Contracts, legal documents, and compliance information', '#373F51'),
+  ('Product', 'Product specifications, development, and documentation', '#EE716A'),
+  ('Customer Service', 'Customer support, feedback, and service procedures', '#D1E3DD');
