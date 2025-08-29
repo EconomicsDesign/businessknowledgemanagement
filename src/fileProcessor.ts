@@ -79,15 +79,50 @@ export async function processFile(file: File): Promise<ProcessedFile> {
 }
 
 /**
- * Process PDF files - simplified approach for Cloudflare Workers
+ * Process PDF files - basic text extraction for Cloudflare Workers
  */
 async function processPDF(file: File): Promise<ProcessedFile> {
-  // For Cloudflare Workers, PDF processing is complex due to binary dependencies
-  // We'll recommend using external services or manual paste for PDFs
-  return {
-    content: '',
-    error: 'PDF processing requires external service integration. Please extract the text and paste it directly, or contact administrator for PDF processing setup.'
-  };
+  try {
+    // For basic PDF text extraction, we'll try to extract any readable text
+    const arrayBuffer = await file.arrayBuffer();
+    const uint8Array = new Uint8Array(arrayBuffer);
+    
+    // Convert to string and look for text content
+    let pdfString = '';
+    for (let i = 0; i < uint8Array.length; i++) {
+      pdfString += String.fromCharCode(uint8Array[i]);
+    }
+    
+    // Simple text extraction - look for readable text patterns
+    const textMatches = pdfString.match(/\(([^)]+)\)/g);
+    if (textMatches && textMatches.length > 0) {
+      let extractedText = '';
+      textMatches.forEach(match => {
+        const text = match.slice(1, -1); // Remove parentheses
+        if (text.length > 3 && /[a-zA-Z]/.test(text)) { // Only include text with letters
+          extractedText += text + ' ';
+        }
+      });
+      
+      if (extractedText.trim().length > 50) {
+        return { 
+          content: `[PDF Content Extracted]\n\n${extractedText.trim()}\n\n[Note: Basic PDF extraction - some formatting may be lost]` 
+        };
+      }
+    }
+    
+    // If no text found with simple extraction, provide helpful guidance
+    return {
+      content: '',
+      error: 'Could not extract text from this PDF file. The PDF may be image-based or encrypted. Please try: 1) Copy and paste text directly from the PDF, 2) Use a PDF-to-text converter, or 3) Contact administrator for advanced PDF processing setup.'
+    };
+    
+  } catch (error) {
+    return {
+      content: '',
+      error: 'Failed to process PDF file. Please copy and paste the text content directly, or contact administrator for PDF processing setup.'
+    };
+  }
 }
 
 /**
