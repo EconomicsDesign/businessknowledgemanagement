@@ -1,0 +1,173 @@
+/* Business Knowledge Management Tool - Additional Styles */
+
+/* Smooth transitions for interactive elements */
+.tab-btn {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.tab-btn:hover {
+    color: #4f46e5;
+}
+
+/* Upload area styling */
+.upload-area {
+    border: 2px dashed #cbd5e1;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.upload-area:hover {
+    border-color: #3b82f6;
+    background-color: #f8fafc;
+}
+
+.upload-area.dragover {
+    border-color: #3b82f6;
+    background-color: #f0f9ff;
+    transform: scale(1.02);
+}
+
+/* Segment badges with hover effects */
+.segment-badge:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Chat container styling */
+.chat-container {
+    max-height: 400px;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+}
+
+.chat-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.chat-container::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 3px;
+}
+
+.chat-container::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 3px;
+}
+
+.chat-container::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* Message animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.chat-container > div {
+    animation: fadeInUp 0.3s ease-out;
+}
+
+/* Loading spinner */
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.fa-spinner {
+    animation: spin 1s linear infinite;
+}
+
+/* Document cards */
+.document-card {
+    transition: all 0.2s ease;
+}
+
+.document-card:hover {
+    background-color: #f8fafc;
+    border-color: #e2e8f0;
+}
+
+/* Notification animations */
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.fixed.top-4.right-4 {
+    animation: slideInRight 0.3s ease-out;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .chat-container {
+        max-height: 300px;
+    }
+    
+    .grid-cols-1.lg\\:grid-cols-2 {
+        grid-template-columns: 1fr;
+    }
+    
+    .tab-btn {
+        font-size: 0.875rem;
+        padding: 0.5rem;
+    }
+}
+
+/* Form focus styles */
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    ring: 2px;
+    ring-color: #3b82f6;
+    ring-opacity: 0.5;
+    border-color: #3b82f6;
+}
+
+/* Button hover effects */
+button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+/* Custom scrollbar for document list */
+#documents-list {
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+#documents-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+#documents-list::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 4px;
+}
+
+#documents-list::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+}
+
+#documents-list::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
