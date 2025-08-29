@@ -6,8 +6,9 @@
 - **Features**: Document upload, AI-powered categorisation, knowledge base browsing, and conversational Q&A chatbot
 
 ## 🌐 URLs
+- **Production**: https://bkm.economicsdesign.com (Custom Domain)
+- **Backup URL**: https://business-knowledge-tool.pages.dev (Cloudflare Pages)
 - **Development**: https://3000-ipcasslymqyl781ow4rmv.e2b.dev
-- **Production**: https://business-knowledge-tool.pages.dev (Cloudflare Pages)
 - **GitHub**: https://github.com/EconomicsDesign/businessknowledgemanagement
 
 ## 🚀 Current Features (Completed)
