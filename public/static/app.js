@@ -351,6 +351,11 @@ function renderDocuments(documents) {
                             ` : ''}
                         </div>
                     </div>
+                    <div class="flex-shrink-0 ml-4">
+                        <button onclick="deleteDocument(${doc.id}, '${doc.title.replace(/'/g, '\\\'')}')" class="text-red-500 hover:text-red-700 hover:bg-red-50 p-2 rounded-lg transition-colors" title="Delete document">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         `;
@@ -525,5 +530,39 @@ function getNotificationIcon(type) {
         case 'error': return 'fa-exclamation-circle';
         case 'warning': return 'fa-exclamation-triangle';
         default: return 'fa-info-circle';
+    }
+}
+
+// Delete document function
+async function deleteDocument(documentId, documentTitle) {
+    // Confirm deletion
+    const confirmed = confirm(`Are you sure you want to delete "${documentTitle}"?\n\nThis action cannot be undone and will also remove any related chat references.`);
+    
+    if (!confirmed) {
+        return;
+    }
+
+    try {
+        showNotification('Deleting document...', 'info');
+        
+        const response = await axios.delete(`/api/documents/${documentId}`);
+        
+        if (response.data.success) {
+            showNotification('Document deleted successfully!', 'success');
+            
+            // Reload documents list
+            await loadDocuments();
+            
+            // Reload segments to update counts
+            await loadSegments();
+            
+        } else {
+            showNotification(response.data.error || 'Failed to delete document', 'error');
+        }
+        
+    } catch (error) {
+        console.error('Delete error:', error);
+        const errorMsg = error.response?.data?.error || 'Failed to delete document';
+        showNotification(errorMsg, 'error');
     }
 }
