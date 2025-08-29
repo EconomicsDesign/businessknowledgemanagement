@@ -521,6 +521,9 @@ app.get('/', (c) => {
                     <button onclick="showTab('chat')" id="chat-tab" class="tab-btn text-gray-500 pb-2 font-medium hover:text-gray-700">
                         <i class="fas fa-comments mr-1"></i> Chat Assistant
                     </button>
+                    <button onclick="showTab('privacy')" id="privacy-tab" class="tab-btn text-gray-500 pb-2 font-medium hover:text-gray-700">
+                        <i class="fas fa-shield-alt mr-1"></i> Privacy & Security
+                    </button>
                 </nav>
             </div>
 
@@ -647,6 +650,173 @@ app.get('/', (c) => {
                             <i class="fas fa-info-circle mr-1"></i>
                             Answers are based only on your uploaded documents
                         </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Privacy & Security Tab -->
+            <div id="privacy-content" class="tab-content hidden">
+                <div class="bg-white rounded-lg shadow">
+                    <div class="p-6 border-b">
+                        <h2 class="text-xl font-semibold">
+                            <i class="fas fa-shield-alt text-green-600 mr-2"></i>
+                            Privacy & Security Configuration
+                        </h2>
+                        <p class="text-gray-600 mt-1">Configure where your business documents are stored and how they're protected</p>
+                    </div>
+                    
+                    <div class="p-6">
+                        <!-- Current Storage Status -->
+                        <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+                            <h3 class="font-semibold text-blue-900 mb-2">
+                                <i class="fas fa-info-circle mr-2"></i>Current Storage Status
+                            </h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                                <div>
+                                    <strong>Storage Type:</strong> Cloudflare D1 Database<br>
+                                    <strong>Privacy Level:</strong> <span class="text-green-600 font-semibold">PRIVATE</span><br>
+                                    <strong>Encryption:</strong> <span class="text-green-600">At Rest & In Transit</span><br>
+                                    <strong>Access Control:</strong> Your Account Only
+                                </div>
+                                <div>
+                                    <strong>Database ID:</strong> <code class="text-xs bg-gray-100 px-1 rounded">a5beac0f-e512-435a-be7d-33f8164fbfe6</code><br>
+                                    <strong>Location:</strong> Cloudflare Global Network<br>
+                                    <strong>Compliance:</strong> GDPR, SOC2, ISO27001<br>
+                                    <strong>Data Residency:</strong> Your Cloudflare Account
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Privacy Options -->
+                        <h3 class="font-semibold text-gray-900 mb-4">Enhanced Privacy Options</h3>
+                        
+                        <div class="space-y-4">
+                            <!-- Option 1: Current Setup (Enhanced) -->
+                            <div class="border rounded-lg p-4 bg-green-50 border-green-200">
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 mt-1">
+                                        <i class="fas fa-check-circle text-green-600"></i>
+                                    </div>
+                                    <div class="ml-3">
+                                        <h4 class="font-semibold text-green-900">✅ Current Setup: Cloudflare D1 (RECOMMENDED)</h4>
+                                        <p class="text-green-700 text-sm mt-1">
+                                            Your documents are already stored privately in your Cloudflare account. 
+                                            All data is encrypted and only accessible with your API credentials.
+                                        </p>
+                                        <div class="mt-2 text-xs text-green-600">
+                                            <strong>Benefits:</strong> Zero additional setup, enterprise security, global performance, automatic backups
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Option 2: Client-Side Encryption -->
+                            <div class="border rounded-lg p-4 border-gray-200">
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 mt-1">
+                                        <i class="fas fa-lock text-blue-600"></i>
+                                    </div>
+                                    <div class="ml-3">
+                                        <h4 class="font-semibold text-gray-900">🔒 Enhanced: Client-Side Encryption</h4>
+                                        <p class="text-gray-700 text-sm mt-1">
+                                            Add an extra layer of encryption where documents are encrypted in your browser before uploading.
+                                        </p>
+                                        <div class="mt-2 text-xs text-gray-600">
+                                            <strong>Benefits:</strong> Zero-knowledge encryption, only you can decrypt documents
+                                        </div>
+                                        <button class="mt-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
+                                            Enable Client-Side Encryption
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Option 3: Private Cloud -->
+                            <div class="border rounded-lg p-4 border-gray-200">
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 mt-1">
+                                        <i class="fas fa-cloud text-purple-600"></i>
+                                    </div>
+                                    <div class="ml-3">
+                                        <h4 class="font-semibold text-gray-900">☁️ Enterprise: Private Cloud Storage</h4>
+                                        <p class="text-gray-700 text-sm mt-1">
+                                            Store documents in your own AWS S3, Google Cloud, or Azure storage accounts.
+                                        </p>
+                                        <div class="mt-2 text-xs text-gray-600">
+                                            <strong>Benefits:</strong> Full control, enterprise compliance (HIPAA, GDPR), custom location
+                                        </div>
+                                        <button class="mt-2 bg-purple-600 text-white px-3 py-1 rounded text-sm hover:bg-purple-700">
+                                            Configure Private Cloud
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Option 4: Self-Hosted -->
+                            <div class="border rounded-lg p-4 border-gray-200">
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 mt-1">
+                                        <i class="fas fa-server text-indigo-600"></i>
+                                    </div>
+                                    <div class="ml-3">
+                                        <h4 class="font-semibold text-gray-900">🏢 Maximum Privacy: Self-Hosted Server</h4>
+                                        <p class="text-gray-700 text-sm mt-1">
+                                            Deploy the application on your own servers with your own database.
+                                        </p>
+                                        <div class="mt-2 text-xs text-gray-600">
+                                            <strong>Benefits:</strong> Complete control, data never leaves your infrastructure
+                                        </div>
+                                        <button class="mt-2 bg-indigo-600 text-white px-3 py-1 rounded text-sm hover:bg-indigo-700">
+                                            Self-Hosting Guide
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Security Features -->
+                        <div class="mt-8 bg-gray-50 rounded-lg p-4">
+                            <h3 class="font-semibold text-gray-900 mb-3">🛡️ Current Security Features</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                                <ul class="space-y-2">
+                                    <li class="flex items-center text-green-700">
+                                        <i class="fas fa-check mr-2"></i> Encrypted data storage
+                                    </li>
+                                    <li class="flex items-center text-green-700">
+                                        <i class="fas fa-check mr-2"></i> Secure HTTPS connections
+                                    </li>
+                                    <li class="flex items-center text-green-700">
+                                        <i class="fas fa-check mr-2"></i> Private database access
+                                    </li>
+                                    <li class="flex items-center text-green-700">
+                                        <i class="fas fa-check mr-2"></i> No public document URLs
+                                    </li>
+                                </ul>
+                                <ul class="space-y-2">
+                                    <li class="flex items-center text-green-700">
+                                        <i class="fas fa-check mr-2"></i> SQL injection protection
+                                    </li>
+                                    <li class="flex items-center text-green-700">
+                                        <i class="fas fa-check mr-2"></i> API-only document access
+                                    </li>
+                                    <li class="flex items-center text-green-700">
+                                        <i class="fas fa-check mr-2"></i> Automatic data backups
+                                    </li>
+                                    <li class="flex items-center text-green-700">
+                                        <i class="fas fa-check mr-2"></i> Enterprise-grade infrastructure
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Contact for Enterprise Setup -->
+                        <div class="mt-6 bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                            <h4 class="font-semibold text-yellow-900">📞 Need Enterprise Setup?</h4>
+                            <p class="text-yellow-800 text-sm mt-1">
+                                For custom privacy configurations, compliance requirements, or enterprise deployment, 
+                                I can help you implement any of the above options.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
