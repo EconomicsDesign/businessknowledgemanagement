@@ -39,16 +39,23 @@
    - Session-based conversation history
    - Context-aware responses
 
-5. **EconomicsDesign Corporate Branding**
+5. **Document Management**
+   - **Document deletion functionality** with confirmation dialogs
+   - **One-click delete** from document browser with proper cleanup
+   - **Automatic reference cleanup** removes related chat references and knowledge chunks
+   - **Real-time UI updates** after document operations
+   - **Segment count updates** maintain accurate categorization statistics
+
+6. **EconomicsDesign Corporate Branding**
    - **Complete brand integration** with EconomicsDesign color palette
    - **Authentic isometric cube logo** matching company visual identity
+   - **Exact logo integration** from provided design files
    - **Salmon red primary color** (#EE716A) with supporting brand colors
-   - **Professional SVG logo** available at `/static/ed-logo.svg`
    - **Consistent branding** across all UI elements and business segments
 
-6. **Responsive Web Interface**
+7. **Responsive Web Interface**
    - Modern UI using TailwindCSS and FontAwesome icons
-   - Tab-based navigation (Upload, Browse, Chat)
+   - **Clean 3-tab navigation** (Upload, Browse, Chat)
    - Interactive upload area with drag-and-drop
    - Real-time notifications and feedback
    - Mobile-friendly responsive design
@@ -67,6 +74,7 @@
 | `/api/segments` | GET | Get all business segments | None |
 | `/api/documents/upload` | POST | Upload and process document | `title`, `file` or `content` |
 | `/api/documents` | GET | Get documents (with optional filtering) | `segment` (optional) |
+| `/api/documents/:id` | DELETE | Delete document and related data | `id` (document ID) |
 | `/api/chat` | POST | Send message to AI assistant | `message`, `sessionId` |
 | `/api/chat/:sessionId` | GET | Get chat history for session | `sessionId` |
 
@@ -74,7 +82,7 @@
 | Feature | Location | Description |
 |---------|----------|-------------|
 | Document Upload | `/` (Upload tab) | File upload or paste content with title |
-| Knowledge Browser | `/` (Browse tab) | View and filter all documents by segment |
+| Knowledge Browser | `/` (Browse tab) | View, filter, and delete documents by segment |
 | AI Chat Assistant | `/` (Chat tab) | Conversational interface with business knowledge |
 
 ## 🎯 User Guide
@@ -99,8 +107,10 @@
    - Business segment (colour-coded)
    - Upload date and file information
    - AI categorisation confidence
+   - Delete button (trash icon) for document removal
 3. Filter documents by business segment using the dropdown
 4. Click "Filter" to apply segment filtering
+5. **Delete documents**: Click the trash icon and confirm to permanently remove documents
 
 ### Using the Chat Assistant
 1. Navigate to the **Chat Assistant** tab
