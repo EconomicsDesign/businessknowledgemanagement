@@ -1,0 +1,52 @@
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+    <!-- EconomicsDesign Isometric Cube Logo -->
+    <defs>
+        <!-- Primary gradient for main faces -->
+        <linearGradient id="edPrimary" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#F6B0A4;stop-opacity:1" />
+            <stop offset="50%" style="stop-color:#EE716A;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#E85A53;stop-opacity:1" />
+        </linearGradient>
+        <!-- Secondary gradient for depth faces -->
+        <linearGradient id="edSecondary" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#EE716A;stop-opacity:0.8" />
+            <stop offset="100%" style="stop-color:#D85E58;stop-opacity:0.9" />
+        </linearGradient>
+        <!-- Shadow gradient -->
+        <linearGradient id="edShadow" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#C14A45;stop-opacity:0.7" />
+            <stop offset="100%" style="stop-color:#A63B36;stop-opacity:0.8" />
+        </linearGradient>
+    </defs>
+    
+    <!-- Isometric cube with proper 3D perspective -->
+    <!-- Top face -->
+    <path d="M30 35 L60 20 L90 35 L60 50 Z" 
+          fill="url(#edPrimary)" 
+          stroke="#373F51" 
+          stroke-width="1.5"/>
+    
+    <!-- Left face -->
+    <path d="M30 35 L60 50 L60 80 L30 65 Z" 
+          fill="url(#edSecondary)" 
+          stroke="#373F51" 
+          stroke-width="1.5"/>
+    
+    <!-- Right face -->
+    <path d="M60 50 L90 35 L90 65 L60 80 Z" 
+          fill="url(#edShadow)" 
+          stroke="#373F51" 
+          stroke-width="1.5"/>
+    
+    <!-- Inner design elements for brand detail -->
+    <circle cx="50" cy="38" r="3" fill="#5CA4A9" opacity="0.8"/>
+    <circle cx="70" cy="38" r="3" fill="#5CA4A9" opacity="0.8"/>
+    <path d="M45 45 L65 45 L60 55 L50 55 Z" fill="#9BC1BC" opacity="0.6"/>
+    
+    <!-- Subtle highlight for 3D effect -->
+    <path d="M33 37 L57 22 L87 37" 
+          fill="none" 
+          stroke="#FFFFFF" 
+          stroke-width="1" 
+          opacity="0.3"/>
+</svg>

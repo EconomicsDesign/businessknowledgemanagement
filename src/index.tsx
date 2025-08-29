@@ -498,22 +498,57 @@ app.get('/', (c) => {
         <header class="bg-white shadow-sm border-b">
             <div class="max-w-7xl mx-auto px-4 py-4">
                 <h1 class="text-2xl font-bold text-gray-900 flex items-center">
-                    <svg class="ed-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                        <!-- EconomicsDesign Logo -->
+                    <svg class="ed-logo" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                        <!-- EconomicsDesign Isometric Cube Logo -->
                         <defs>
-                            <linearGradient id="edGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" style="stop-color:#EE716A;stop-opacity:1" />
-                                <stop offset="50%" style="stop-color:#F6B0A4;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#EE716A;stop-opacity:1" />
+                            <!-- Primary gradient for main faces -->
+                            <linearGradient id="edPrimary" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#F6B0A4;stop-opacity:1" />
+                                <stop offset="50%" style="stop-color:#EE716A;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#E85A53;stop-opacity:1" />
+                            </linearGradient>
+                            <!-- Secondary gradient for depth faces -->
+                            <linearGradient id="edSecondary" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#EE716A;stop-opacity:0.8" />
+                                <stop offset="100%" style="stop-color:#D85E58;stop-opacity:0.9" />
+                            </linearGradient>
+                            <!-- Shadow gradient -->
+                            <linearGradient id="edShadow" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#C14A45;stop-opacity:0.7" />
+                                <stop offset="100%" style="stop-color:#A63B36;stop-opacity:0.8" />
                             </linearGradient>
                         </defs>
-                        <!-- Isometric cube design similar to your logo -->
-                        <path d="M20 30 L50 15 L80 30 L80 60 L50 75 L20 60 Z" fill="url(#edGradient)" stroke="#373F51" stroke-width="2"/>
-                        <path d="M20 30 L50 45 L80 30" fill="none" stroke="#373F51" stroke-width="2"/>
-                        <path d="M50 45 L50 75" fill="none" stroke="#373F51" stroke-width="2"/>
-                        <rect x="25" y="35" width="20" height="4" fill="#5CA4A9" rx="2"/>
-                        <rect x="55" y="35" width="20" height="4" fill="#5CA4A9" rx="2"/>
-                        <rect x="35" y="45" width="20" height="4" fill="#9BC1BC" rx="2"/>
+                        
+                        <!-- Isometric cube with proper 3D perspective -->
+                        <!-- Top face -->
+                        <path d="M30 35 L60 20 L90 35 L60 50 Z" 
+                              fill="url(#edPrimary)" 
+                              stroke="#373F51" 
+                              stroke-width="1.5"/>
+                        
+                        <!-- Left face -->
+                        <path d="M30 35 L60 50 L60 80 L30 65 Z" 
+                              fill="url(#edSecondary)" 
+                              stroke="#373F51" 
+                              stroke-width="1.5"/>
+                        
+                        <!-- Right face -->
+                        <path d="M60 50 L90 35 L90 65 L60 80 Z" 
+                              fill="url(#edShadow)" 
+                              stroke="#373F51" 
+                              stroke-width="1.5"/>
+                        
+                        <!-- Inner design elements for brand detail -->
+                        <circle cx="50" cy="38" r="3" fill="#5CA4A9" opacity="0.8"/>
+                        <circle cx="70" cy="38" r="3" fill="#5CA4A9" opacity="0.8"/>
+                        <path d="M45 45 L65 45 L60 55 L50 55 Z" fill="#9BC1BC" opacity="0.6"/>
+                        
+                        <!-- Subtle highlight for 3D effect -->
+                        <path d="M33 37 L57 22 L87 37" 
+                              fill="none" 
+                              stroke="#FFFFFF" 
+                              stroke-width="1" 
+                              opacity="0.3"/>
                     </svg>
                     Business Knowledge Management Tool
                 </h1>
