@@ -422,22 +422,47 @@ app.post('/api/chat', async (c) => {
       .map((r: any) => `[${r.segment_name}] ${r.title}: ${r.chunk_text}`)
       .join('\\n\\n');
 
+    // Check if AI binding is available
+    if (!AI) {
+      return c.json({ 
+        success: false, 
+        error: 'AI service is not available. Please check the Cloudflare Workers AI binding configuration.' 
+      }, 500);
+    }
+
     // Generate response using AI
-    const systemPrompt = `You are a helpful business assistant. Answer questions based ONLY on the provided company documentation. If the information is not in the documentation, clearly state that you don't have that information in the company documents.
+    let botResponse = "I'm sorry, I couldn't process your request at the moment.";
+    
+    try {
+      const systemPrompt = `You are a helpful business assistant. Answer questions based ONLY on the provided company documentation. If the information is not in the documentation, clearly state that you don't have that information in the company documents.
 
 Company Documentation:
 ${context}
 
 Always cite which documents or sections you're referencing in your response.`;
 
-    const aiResponse = await AI.run('@cf/meta/llama-3-8b-instruct', {
-      messages: [
-        { role: 'system', content: systemPrompt },
-        { role: 'user', content: message }
-      ]
-    });
+      const aiResponse = await AI.run('@cf/meta/llama-3-8b-instruct', {
+        messages: [
+          { role: 'system', content: systemPrompt },
+          { role: 'user', content: message }
+        ]
+      });
 
-    const botResponse = aiResponse?.response || "I'm sorry, I couldn't process your request at the moment.";
+      botResponse = aiResponse?.response || "I'm sorry, I couldn't generate a response. Please try again.";
+      
+    } catch (aiError) {
+      console.error('AI service error:', aiError);
+      
+      // Provide fallback response based on search results
+      if (searchResults.results.length > 0) {
+        const documents = searchResults.results.slice(0, 3);
+        botResponse = `I found information related to your query in these documents:\n\n${
+          documents.map((doc: any) => `• **${doc.title}** (${doc.segment_name}): ${doc.summary || doc.chunk_text.substring(0, 200)}...`).join('\n\n')
+        }\n\nNote: AI processing is temporarily unavailable. The above information is from your uploaded documents that match your query.`;
+      } else {
+        botResponse = "I don't have any information about that topic in the uploaded business documents. AI processing is also temporarily unavailable. Please try uploading relevant documents first or try again later.";
+      }
+    }
 
     // Save messages
     await DB.prepare(`
